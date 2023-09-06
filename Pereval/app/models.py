@@ -35,3 +35,11 @@ class Level(models.Model):
 
     def __str__(self):
         return f'{self.winter} {self.summer} {self.autumn} {self.spring}'
+
+
+class Image(models.Model):
+    image = models.ImageField(upload_to='image/%Y/%m/%d')
+    title = models.CharField(max_length=128)
+
+    def __str__(self):
+        return f'{self.title} {self.image}'
