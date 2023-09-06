@@ -16,3 +16,12 @@ class CustomUser(models.Model):
 
     def __str__(self):
         return f'{self.email} {self.fam} {self.fam} {self.otch} {self.phone}'
+
+
+class Coordinates(models.Model):
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
+    height = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.latitude} {self.longitude} {self.height}'
