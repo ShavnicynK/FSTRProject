@@ -48,7 +48,7 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
             'coordinates',
             'level',
             'customuser',
-            'image',
+            'image'
         )
 
     def create(self, validated_data):

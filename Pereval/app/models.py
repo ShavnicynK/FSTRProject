@@ -53,7 +53,7 @@ class PerevalAdded(models.Model):
 
     STATUSES = [
         (new, 'новый'),
-        (pending, 'в обработке'),
+        (pending, 'в работе'),
         (accepted, 'принято'),
         (rejected, 'отклонено')
     ]
