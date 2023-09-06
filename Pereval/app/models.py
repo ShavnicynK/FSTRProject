@@ -43,3 +43,37 @@ class Image(models.Model):
 
     def __str__(self):
         return f'{self.title} {self.image}'
+
+
+class PerevalAdded(models.Model):
+    new = 'N'
+    pending = 'P'
+    accepted = 'A'
+    rejected = 'R'
+
+    STATUSES = [
+        (new, 'новый'),
+        (pending, 'в работе'),
+        (accepted, 'принято'),
+        (rejected, 'отклонено')
+    ]
+
+    beautyTitle = models.CharField(max_length=250, blank=False)
+    title = models.CharField(max_length=250, blank=False)
+    other_titles = models.CharField(max_length=250, blank=False)
+    connect = models.CharField(max_length=250, blank=False)
+    add_time = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=1, choices=STATUSES, default=new)
+    coordinates = models.ForeignKey(Coordinates, on_delete=models.CASCADE)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    customuser = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    image = models.ManyToManyField(Image, through='PerevalImage')
+
+
+class PerevalImage(models.Model):
+    pereval = models.ForeignKey(PerevalAdded, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.pereval} {self.image}'
+
