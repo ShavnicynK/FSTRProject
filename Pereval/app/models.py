@@ -25,3 +25,13 @@ class Coordinates(models.Model):
 
     def __str__(self):
         return f'{self.latitude} {self.longitude} {self.height}'
+
+
+class Level(models.Model):
+    winter = models.CharField(max_length=3, blank=True)
+    summer = models.CharField(max_length=3, blank=True)
+    autumn = models.CharField(max_length=3, blank=True)
+    spring = models.CharField(max_length=3, blank=True)
+
+    def __str__(self):
+        return f'{self.winter} {self.summer} {self.autumn} {self.spring}'
