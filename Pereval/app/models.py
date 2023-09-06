@@ -8,7 +8,7 @@ phone_valid = RegexValidator(
 
 
 class CustomUser(models.Model):
-    email = models.CharField(max_length=200, unique=True, blank=False)
+    email = models.CharField(max_length=200, blank=False)
     name = models.CharField(max_length=50, blank=True)
     fam = models.CharField(max_length=50, blank=True)
     otch = models.CharField(max_length=50, blank=True)
@@ -38,7 +38,7 @@ class Level(models.Model):
 
 
 class Image(models.Model):
-    image = models.FileField(upload_to='image/%Y/%m/%d')
+    data = models.ImageField(upload_to='image/%Y/%m/%d')
     title = models.CharField(max_length=128)
 
     def __str__(self):

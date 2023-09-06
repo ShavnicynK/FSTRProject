@@ -27,7 +27,7 @@ class ImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Image
-        fields = ('title', 'image')
+        fields = ('title', 'data')
 
 
 class PerevalAddedSerializer(serializers.ModelSerializer):
@@ -52,14 +52,16 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
+        image_data = validated_data.pop('image')
+
         customuser_data = validated_data.pop('customuser')
         customuser_email = customuser_data['email']
         customuser_fam = customuser_data['fam']
         customuser_name = customuser_data['name']
         customuser_otch = customuser_data['otch']
         customuser_phone = customuser_data['phone']
-        if CustomUser.object.filter(email=customuser_email).exist():
-            customuser_id = CustomUser.object.filter(email=customuser_email)[0]
+        if CustomUser.objects.filter(email=customuser_email).exists():
+            customuser_id = CustomUser.objects.filter(email=customuser_email)[0]
         else:
             CustomUser.objects.create(
                 email=customuser_email,
@@ -68,7 +70,7 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
                 otch=customuser_otch,
                 phone=customuser_phone
             )
-            customuser_id = CustomUser.object.filter(email=customuser_email)[0]
+            customuser_id = CustomUser.objects.filter(email=customuser_email)[0]
 
         coordinates_data = validated_data.pop('coordinates')
         coordinates_latitude = coordinates_data['latitude']
@@ -79,7 +81,7 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
             longitude=coordinates_longitude,
             height=coordinates_height
         )
-        coordinates_id = Coordinates.object.filter(
+        coordinates_id = Coordinates.objects.filter(
             latitude=coordinates_latitude,
             longitude=coordinates_longitude,
             height=coordinates_height
@@ -89,14 +91,14 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
         level_winter = level_data['winter']
         level_summer = level_data['summer']
         level_autumn = level_data['autumn']
-        level_spring = level_data['spting']
+        level_spring = level_data['spring']
         Level.objects.create(
             winter=level_winter,
             summer=level_summer,
             autumn=level_autumn,
             spring=level_spring
         )
-        level_id = Level.object.filter(
+        level_id = Level.objects.filter(
             winter=level_winter,
             summer=level_summer,
             autumn=level_autumn,
@@ -108,10 +110,10 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
         validated_data.setdefault('level', level_id)
         cur_pereval = PerevalAdded.objects.create(**validated_data)
 
-        image_data = validated_data.pop('image')
-        for image in image_data:
-            cur_image, status = Image.objects.get_or_create(**image)
-            PerevalImage.objects.create(image=cur_image, pereval=cur_pereval)
+        if len(image_data) > 0:
+            for image in image_data:
+                cur_image, status = Image.objects.get_or_create(**image)
+                PerevalImage.objects.create(imag=cur_image, pereval=cur_pereval)
 
         return cur_pereval
 
