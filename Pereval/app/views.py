@@ -18,7 +18,7 @@ class CoordinatesViewSet(viewsets.ModelViewSet):
     serializer_class = CoordinatesSerializer
 
 
-class CustomuserViewSet(viewsets.ModelViewSet):
+class LevelViewSet(viewsets.ModelViewSet):
     queryset = Level.objects.all()
     serializer_class = LevelSerializer
 

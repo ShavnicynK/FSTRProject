@@ -38,7 +38,7 @@ class Level(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='image/%Y/%m/%d')
+    image = models.FileField(upload_to='image/%Y/%m/%d')
     title = models.CharField(max_length=128)
 
     def __str__(self):

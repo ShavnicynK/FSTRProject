@@ -6,7 +6,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'fam', 'name', 'otc', 'phone')
+        fields = ('email', 'fam', 'name', 'otch', 'phone')
 
 
 class CoordinatesSerializer(serializers.ModelSerializer):
@@ -65,7 +65,7 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
                 email=customuser_email,
                 fam=customuser_fam,
                 name=customuser_name,
-                otc=customuser_otch,
+                otch=customuser_otch,
                 phone=customuser_phone
             )
             customuser_id = CustomUser.object.filter(email=customuser_email)[0]
