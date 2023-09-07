@@ -117,5 +117,31 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
 
         return cur_pereval
 
+    def update(self, instance, validated_data):
+        instance.beautyTitle = validated_data.get('beautyTitle')
+        instance.btitle = validated_data.get('title')
+        instance.other_titles = validated_data.get('other_titles')
+        instance.connect = validated_data.get('connect')
+        instance.add_time = validated_data.get('add_time')
+        instance.status = validated_data.get('status')
+
+        coordinates_data = validated_data.get('coordinates')
+        Coordinates.objects.filter(pk=instance.coords_id).update(
+            latitude=coordinates_data['latitude'],
+            longitude=coordinates_data['longitude'],
+            height=coordinates_data['height']
+        )
+
+        level_data = validated_data.get('level')
+        Level.objects.filter(pk=instance.level_id).update(
+            winter=level_data['winter'],
+            summer=level_data['summer'],
+            autumn=level_data['autumn'],
+            spring=level_data['spring']
+        )
+
+        instance.save()
+        return instance
+
 
 
