@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'app',
     'rest_framework',
     'django_filters',
+    'coreapi', # Coreapi for coreapi documentation
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
