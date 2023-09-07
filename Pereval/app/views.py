@@ -1,6 +1,6 @@
-from .models import *
-from .serializers import *
 from rest_framework import viewsets
+from .serializers import *
+from .models import *
 
 
 class PerevalAddedViewSet(viewsets.ModelViewSet):
@@ -25,5 +25,5 @@ class LevelViewSet(viewsets.ModelViewSet):
 
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()
-    serializer_class = ImageSerializer
+    serializer_class = ImageSerializer()
 
