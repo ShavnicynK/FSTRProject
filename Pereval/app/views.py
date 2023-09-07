@@ -1,11 +1,14 @@
-from .models import *
-from .serializers import *
+import django_filters
 from rest_framework import viewsets
+from .serializers import *
+from .models import *
 
 
 class PerevalAddedViewSet(viewsets.ModelViewSet):
     queryset = PerevalAdded.objects.all()
     serializer_class = PerevalAddedSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['customuser_id__email']
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
@@ -25,5 +28,5 @@ class LevelViewSet(viewsets.ModelViewSet):
 
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()
-    serializer_class = ImageSerializer
+    serializer_class = ImageSerializer()
 
