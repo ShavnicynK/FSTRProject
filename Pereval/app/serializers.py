@@ -84,11 +84,11 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
         instance.btitle = validated_data.get('title')
         instance.other_titles = validated_data.get('other_titles')
         instance.connect = validated_data.get('connect')
-        instance.add_time = validated_data.get('add_time')
+        #instance.add_time = validated_data.get('add_time')
         instance.status = validated_data.get('status')
 
         coordinates_data = validated_data.get('coordinates')
-        Coordinates.objects.filter(pk=instance.coords_id).update(
+        Coordinates.objects.filter(pk=instance.coordinates_id).update(
             latitude=coordinates_data['latitude'],
             longitude=coordinates_data['longitude'],
             height=coordinates_data['height']
