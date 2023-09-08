@@ -61,7 +61,7 @@ class PerevalAdded(models.Model):
     beautyTitle = models.CharField(max_length=250, blank=False)
     title = models.CharField(max_length=250, blank=False)
     other_titles = models.CharField(max_length=250, blank=False)
-    connect = models.CharField(max_length=250, blank=False)
+    connect = models.CharField(max_length=250, blank=True)
     add_time = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=STATUSES, default=new)
     coordinates = models.ForeignKey(Coordinates, on_delete=models.CASCADE)
