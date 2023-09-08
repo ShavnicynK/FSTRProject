@@ -74,7 +74,7 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
 
         if len(image_data) > 0:
             for image in image_data:
-                cur_image, status = Image.objects.get_or_create(**image)
+                cur_image = Image.objects.create(**image)
                 PerevalImage.objects.create(image=cur_image, pereval=cur_pereval)
 
         return cur_pereval
@@ -84,7 +84,6 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
         instance.btitle = validated_data.get('title')
         instance.other_titles = validated_data.get('other_titles')
         instance.connect = validated_data.get('connect')
-        #instance.add_time = validated_data.get('add_time')
         instance.status = validated_data.get('status')
 
         coordinates_data = validated_data.get('coordinates')
@@ -101,6 +100,15 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
             autumn=level_data['autumn'],
             spring=level_data['spring']
         )
+
+        image_data = validated_data.get('image')
+        old_image = PerevalImage.objects.filter(pereval=instance)
+        if old_image:
+            for image in old_image:
+                image.delete()
+        for image in image_data:
+            cur_image = Image.objects.create(**image)
+            PerevalImage.objects.create(image=cur_image, pereval=instance)
 
         instance.save()
         return instance
