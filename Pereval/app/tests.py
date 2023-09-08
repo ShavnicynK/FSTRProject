@@ -49,6 +49,6 @@ class TestApiPerevalAdded(APITestCase):
         response = self.client.post(reverse('submitData'), data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_serializer(self):
+    def test_getdata(self):
         response = self.client.get(reverse('submitData'), format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
