@@ -111,6 +111,3 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
-
-
-
