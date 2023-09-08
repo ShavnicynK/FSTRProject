@@ -81,10 +81,9 @@ class PerevalAddedSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance.beautyTitle = validated_data.get('beautyTitle')
-        instance.btitle = validated_data.get('title')
+        instance.title = validated_data.get('title')
         instance.other_titles = validated_data.get('other_titles')
         instance.connect = validated_data.get('connect')
-        instance.status = validated_data.get('status')
 
         coordinates_data = validated_data.get('coordinates')
         Coordinates.objects.filter(pk=instance.coordinates_id).update(

@@ -36,7 +36,7 @@ schema_view = get_schema_view(
 )
 
 router = DefaultRouter()
-router.register('submitData', PerevalAddedViewSet)
+router.register('submitData', PerevalAddedViewSet, basename='submitData')
 router.register('users', CustomUserViewSet)
 router.register('coordinates', CoordinatesViewSet)
 router.register('level', LevelViewSet)
