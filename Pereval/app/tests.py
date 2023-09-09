@@ -16,11 +16,11 @@ class BaseTestCase(APITestCase):
             connect='Connect test',
             status='N',
             customuser=CustomUser.objects.create(
-                email='test@mail.ru',
-                fam='Фамилия_тест',
-                name='Имя_тест',
-                otch='Отчество_тест',
-                phone='+11111111111'
+                email='qwerty@mail.ru',
+                fam='Пупкин',
+                name='Василий',
+                otch='Иванович',
+                phone='+99999999999'
             ),
             coordinates=Coordinates.objects.create(
                 latitude=10,
@@ -160,10 +160,7 @@ class UpdatePerevalDataTest(BaseTestCase):
     def test_update_pereval_with_invalid_user(self):
         url = f'/submitData/{self.pereval_test.pk}/'
         response = self.client.patch(url, invalid_user_test_data, format='json')
-        pereval = PerevalAdded.objects.get(pk=self.pereval_test.pk)
-        serializer = PerevalAddedSerializer(instance=pereval, data=invalid_user_test_data, partial=True)
-        serializer.is_valid()
-        self.assertEqual(response.data, {'state': 0, 'message': serializer.errors})
+        self.assertEqual(response.data, {'state': 0, 'message': "User data cannot be changed!"})
 
     def test_update_pereval_without_new_status(self):
         url = f'/submitData/{self.pereval_test_second.pk}/'
