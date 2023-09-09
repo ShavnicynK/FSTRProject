@@ -166,7 +166,7 @@ invalid_user_test_data = {
                 "fam": "Пупкин2",
                 "name": "Василий",
                 "otch": "Иванович",
-                "phone": "456"
+                "phone": "+99999999999"
             },
             "image": [
                 {
@@ -249,3 +249,4 @@ invalid_level_test_data = {
                 }
             ]
         }
+
